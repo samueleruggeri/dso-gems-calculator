@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSO Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/logo.jpg">
+    <style>
+        /* Applicare uno stile alla scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px; /* Larghezza della scrollbar */
+            height: 8px; /* Altezza della scrollbar per scrollbar orizzontali */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #888; /* Colore del "thumb" della scrollbar */
+            border-radius: 4px; /* Angoli arrotondati per il thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Colore del thumb quando è in hover */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000; /* Colore del "track" della scrollbar */
+        }
+    </style>
+    <style>
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
+        input[type=number]{-moz-appearance: textfield;}
+    </style>
+</head>
+<body class=>
+<section class="py-4 py-xl-5">
+    <div class="container py-4 py-xl-5">
+        <div class="row">
+            <div class="col">
+            <div class="formgems">
+                <h2 class="text-center mb-4" style="font-weight: bold;text-transform: uppercase;">Gem Upgrade Calculator</h2>
+                <div class="form-group">
+                    <input id="count" class="form-control" style="background: #131415;border-color: #ececec4d;color: #ffffff;" min="0" name="Count" type="number" placeholder="Enter count of gems..." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="form-group">
+                    <select id="rarity-now-sel" class="form-control" style="background: #131415;border-color: #ececec4d;color: #ffffff;" name="Rarity now">
+                        <option value="0">Select your current rarity...</option>
+                        <option value="1">Flawed</option>
+                        <option value="2">Splintered</option>
+                        <option value="3">Simple</option>
+                        <option value="4">Normal</option>
+                        <option value="5">Polished</option>
+                        <option value="6">Radiant</option>
+                        <option value="7">Flawless</option>
+                        <option value="8">Sacred</option>
+                        <option value="9">Royal</option>
+                        <option value="10">Trapezoid</option>
+                        <option value="11">Refined Trapezoid</option>
+                        <option value="12">Brilliant Trapezoid</option>
+                        <option value="13">Exquisite Trapezoid</option>
+                        <option value="14">Imperial</option>
+                        <option value="15">Refined Imperial</option>
+                        <option value="16">Brilliant Imperial</option>
+                        <option value="17">Exquisite Imperial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="rarity-needed-sel" class="form-control" style="background: #131415;border-color: #ececec4d;color: #ffffff;" name="Rarity needed">
+                        <option value="0">Select the rarity to which you want to upgrade...</option>
+                        <option value="1">Flawed</option>
+                        <option value="2">Splintered</option>
+                        <option value="3">Simple</option>
+                        <option value="4">Normal</option>
+                        <option value="5">Polished</option>
+                        <option value="6">Radiant</option>
+                        <option value="7">Flawless</option>
+                        <option value="8">Sacred</option>
+                        <option value="9">Royal</option>
+                        <option value="10">Trapezoid</option>
+                        <option value="11">Refined Trapezoid</option>
+                        <option value="12">Brilliant Trapezoid</option>
+                        <option value="13">Exquisite Trapezoid</option>
+                        <option value="14">Imperial</option>
+                        <option value="15">Refined Imperial</option>
+                        <option value="16">Brilliant Imperial</option>
+                        <option value="17">Exquisite Imperial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="gem-type" class="form-control" style="background: #131415;border-color: #ececec4d;color: #ffffff;" name="Gem type">
+                        <option value="0">Select gem type...</option>
+                        <option value="1">Offensive</option>
+                        <option value="2">Defensive</option>
+                    </select>
+                </div>
+                <div id="result-center" class="text-center">
+                    <p>Offensive: Ruby, Onyx, Zircon, Rhodolite <br> Defensive: Diamond, Amethyst, Cyanite, Emerald</p>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btnform" onclick="calculateDust()">Calculate Dust Required</button>
+                        <div id="result" class="mt-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-4 py-xl-5">
+    <div class="container py-4 py-xl-5">
+        <div class="row">
+            <div class="col">
+            <div class="formgems">
+                <h2 class="text-center mb-4" style="font-weight: bold;text-transform: uppercase;">Opals Dust Calculator</h2>
+                <div class="form-group">
+                    <label for="number-opal mb-3" class="form-label">Number of Opals</label>
+                    <input type="number" class="form-control" id="number-opal" placeholder="Number of Opals"min="1" value="1" style="background: #131415;border-color: #ececec4d;color: #ffffff;" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="opal-rarity" class="form-label">Opal Rarity</label>
+                    <select class="form-control" id="opal-rarity" style="background: #131415;border-color: #ececec4d;color: #ffffff;">
+                        <option value="0">Select...</option>
+                        <option value="4500">Royal</option>
+                        <option value="7875">Trapezoid</option>
+                        <option value="12375">Refined Trapezoid</option>
+                        <option value="18000">Brilliant Trapezoid</option>
+                        <option value="24750">Exquisite Trapezoid</option>
+                        <option value="32625">Imperial</option>
+                        <option value="41625">Refined Imperial</option>
+                        <option value="51750">Brilliant Imperial</option>
+                        <option value="63000">Exquisite Imperial</option>
+                    </select>
+                </div>
+                <p id="opalsresult" class="text-center">Select opal rarity!</p>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="js/opals.js"></script>
+<script src="js/gems.js"></script>
+</body>
+</html>
